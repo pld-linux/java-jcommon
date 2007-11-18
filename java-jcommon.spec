@@ -40,6 +40,7 @@ All test tasks for %{name}.
 %package javadoc
 Summary:	Javadoc for %{name}
 Group:		Documentation
+Requires:	jpackage-utils
 
 %description javadoc
 Javadoc for %{name}.
