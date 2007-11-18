@@ -7,7 +7,7 @@
 Summary:	Common library
 Name:		jcommon
 Version:	1.0.12
-Release:	0.1
+Release:	0.2
 Epoch:		0
 License:	LGPL
 URL:		http://www.jfree.org/jcommon/index.html
@@ -60,7 +60,6 @@ export LC_ALL=en_US # source code not US-ASCII
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_javadir}/%{name}
 # jars
 install -d $RPM_BUILD_ROOT%{_javadir}
 install %{name}-%{version}.jar $RPM_BUILD_ROOT%{_javadir}
@@ -88,7 +87,6 @@ ln -nfs %{name}-%{version} %{_javadocdir}/%{name}
 %doc README.txt
 %{_javadir}/%{name}.jar
 %{_javadir}/%{name}-%{version}.jar
-%dir %{_javadir}/%{name}
 
 %if %{with tests}
 %files test
