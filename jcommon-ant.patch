@@ -1,10 +1,10 @@
---- jcommon-0.9.1/ant/build.xml~	2007-11-18 14:46:54.000000000 +0200
-+++ jcommon-0.9.1/ant/build.xml	2007-11-18 14:46:56.630415983 +0200
+--- jcommon-0.9.1/ant/build.xml	2004-01-09 14:12:19.000000000 +0200
++++ jcommon-0.9.1.ant/ant/build.xml	2007-11-18 14:53:03.831466257 +0200
 @@ -25,6 +25,7 @@
          <property name="builddir" value="${basedir}/build" />
          <property name="junit.jar" value="${basedir}/junit/junit.jar" />
          <property name="gnujaxp.jar" value="${basedir}/lib/gnujaxp.jar"/>
-+		<property name="compile.source" value="1.4"/>
++        <property name="compile.source" value="1.4"/>
  
          <path id="build.classpath">
              <pathelement location="${gnujaxp.jar}"/>
@@ -13,9 +13,17 @@
          <!-- compile the source -->
          <javac srcdir="${basedir}/src" 
 -               destdir="${basedir}/build">
-+			destdir="${basedir}/build"
-+			source="${compile.source}"
-+			>
++               destdir="${basedir}/build"
++               source="${compile.source}"
++            >
              <classpath refid="build.classpath" />
              <include name="org/jfree/*"/>
              <include name="org/jfree/date/*"/>
+@@ -116,6 +119,7 @@
+         <delete dir="${basedir}/javadoc" />
+         <mkdir dir="${basedir}/javadoc" />
+         <javadoc destdir="${basedir}/javadoc" 
++                 source="${compile.source}"
+                  windowtitle="JCommon Class Library (version ${jcommon.version})"
+                  overview="${basedir}/src/jcommon_overview.html">
+             <packageset dir="${basedir}/src" defaultexcludes="yes">
