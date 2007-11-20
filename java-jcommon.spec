@@ -17,6 +17,7 @@ Group:		Development/Languages/Java
 BuildRequires:	ant
 BuildRequires:	jpackage-utils >= 0:1.5
 BuildRequires:	junit
+BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.300
 %if %(locale -a | grep -q '^en_US$'; echo $?)
 BuildRequires:	glibc-localedb-all
