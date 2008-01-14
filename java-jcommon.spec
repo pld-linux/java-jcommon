@@ -4,16 +4,17 @@
 %bcond_without	tests		# don't build and run tests
 #
 %include	/usr/lib/rpm/macros.java
-Summary:	Common library
+Summary:	Common library for Object Refinery Projects
+Summary(pl.UTF-8):	Biblioteka wspólna dla projektów Object Refinery
 Name:		jcommon
 Version:	1.0.12
 Release:	0.2
 Epoch:		0
 License:	LGPL
-URL:		http://www.jfree.org/jcommon/index.html
+Group:		Development/Languages/Java
 Source0:	http://dl.sourceforge.net/jfreechart/%{name}-%{version}.tar.gz
 # Source0-md5:	7fbb41dfcf6dba36f10ec7d89d1dd3f7
-Group:		Development/Languages/Java
+URL:		http://www.jfree.org/jcommon/index.html
 BuildRequires:	ant
 BuildRequires:	jpackage-utils >= 0:1.5
 BuildRequires:	junit
@@ -27,10 +28,15 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Collection of classes used by Object Refinery Projects, for example
-jfreechart
+jfreechart.
+
+%description -l pl.UTF-8
+Zbiór klas używanych przez projekty Object Refinery, jak na przykład
+jfreechart.
 
 %package test
 Summary:	Test tasks for %{name}
+Summary(pl.UTF-8):	Zadania testowe dla pakietu %{name}
 Group:		Development/Languages/Java
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	junit
@@ -38,16 +44,23 @@ Requires:	junit
 %description test
 All test tasks for %{name}.
 
+%description test -l pl.UTF-8
+Wszystkie zadania testowe dla pakietu %{name}.
+
 %package javadoc
 Summary:	Javadoc for %{name}
+Summary(pl.UTF-8):	Dokumentacja Javadoc do pakietu %{name}
 Group:		Documentation
 Requires:	jpackage-utils
 
 %description javadoc
 Javadoc for %{name}.
 
-%description javadoc -l fr
+%description javadoc -l fr.UTF-8
 Javadoc pour %{name}.
+
+%description javadoc -l pl.UTF-8
+Dokumentacja Javadoc do pakietu %{name}.
 
 %prep
 %setup -q
