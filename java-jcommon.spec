@@ -7,13 +7,12 @@
 Summary:	Common library for Object Refinery Projects
 Summary(pl.UTF-8):	Biblioteka wspólna dla projektów Object Refinery
 Name:		jcommon
-Version:	1.0.12
-Release:	0.2
-Epoch:		0
+Version:	1.0.16
+Release:	0.1
 License:	LGPL
-Group:		Development/Languages/Java
+Group:		Libraries/Java
 Source0:	http://dl.sourceforge.net/jfreechart/%{name}-%{version}.tar.gz
-# Source0-md5:	7fbb41dfcf6dba36f10ec7d89d1dd3f7
+# Source0-md5:	5fb774c225cdc7d15a99c9702031ae05
 URL:		http://www.jfree.org/jcommon/index.html
 BuildRequires:	ant
 BuildRequires:	jpackage-utils >= 0:1.5
