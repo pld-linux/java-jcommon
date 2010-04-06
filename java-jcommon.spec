@@ -4,14 +4,15 @@
 %bcond_without	tests		# don't build and run tests
 #
 %include	/usr/lib/rpm/macros.java
+%define		srcname		jcommon
 Summary:	Common library for Object Refinery Projects
 Summary(pl.UTF-8):	Biblioteka wspólna dla projektów Object Refinery
-Name:		jcommon
+Name:		java-jcommon
 Version:	1.0.16
 Release:	0.1
 License:	LGPL
 Group:		Libraries/Java
-Source0:	http://dl.sourceforge.net/jfreechart/%{name}-%{version}.tar.gz
+Source0:	http://dl.sourceforge.net/jfreechart/%{srcname}-%{version}.tar.gz
 # Source0-md5:	5fb774c225cdc7d15a99c9702031ae05
 URL:		http://www.jfree.org/jcommon/index.html
 BuildRequires:	ant
@@ -34,35 +35,35 @@ Zbiór klas używanych przez projekty Object Refinery, jak na przykład
 jfreechart.
 
 %package test
-Summary:	Test tasks for %{name}
-Summary(pl.UTF-8):	Zadania testowe dla pakietu %{name}
+Summary:	Test tasks for %{srcname}
+Summary(pl.UTF-8):	Zadania testowe dla pakietu %{srcname}
 Group:		Development/Languages/Java
-Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	%{srcname} = %{epoch}:%{version}-%{release}
 Requires:	junit
 
 %description test
-All test tasks for %{name}.
+All test tasks for %{srcname}.
 
 %description test -l pl.UTF-8
-Wszystkie zadania testowe dla pakietu %{name}.
+Wszystkie zadania testowe dla pakietu %{srcname}.
 
 %package javadoc
-Summary:	Javadoc for %{name}
-Summary(pl.UTF-8):	Dokumentacja Javadoc do pakietu %{name}
+Summary:	Javadoc for %{srcname}
+Summary(pl.UTF-8):	Dokumentacja Javadoc do pakietu %{srcname}
 Group:		Documentation
 Requires:	jpackage-utils
 
 %description javadoc
-Javadoc for %{name}.
+Javadoc for %{srcname}.
 
 %description javadoc -l fr.UTF-8
-Javadoc pour %{name}.
+Javadoc pour %{srcname}.
 
 %description javadoc -l pl.UTF-8
-Dokumentacja Javadoc do pakietu %{name}.
+Dokumentacja Javadoc do pakietu %{srcname}.
 
 %prep
-%setup -q
+%setup -q -n %{srcname}-%{version}
 # remove all binary libs
 find . -name '*.jar' | xargs rm -v
 
@@ -76,42 +77,42 @@ export LC_ALL=en_US # source code not US-ASCII
 rm -rf $RPM_BUILD_ROOT
 # jars
 install -d $RPM_BUILD_ROOT%{_javadir}
-install %{name}-%{version}.jar $RPM_BUILD_ROOT%{_javadir}
-ln -s %{name}-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/%{name}.jar
+install %{srcname}-%{version}.jar $RPM_BUILD_ROOT%{_javadir}
+ln -s %{srcname}-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/%{srcname}.jar
 %if %{with tests}
-install lib/%{name}-%{version}-junit.jar $RPM_BUILD_ROOT%{_javadir}
-ln -s %{name}-%{version}-junit.jar $RPM_BUILD_ROOT%{_javadir}/%{name}-junit.jar
+install lib/%{srcname}-%{version}-junit.jar $RPM_BUILD_ROOT%{_javadir}
+ln -s %{srcname}-%{version}-junit.jar $RPM_BUILD_ROOT%{_javadir}/%{srcname}-junit.jar
 %endif
 
 # javadoc
 %if %{with javadoc}
-install -d $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
-cp -pr javadoc/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
-ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{name} # ghost symlink
+install -d $RPM_BUILD_ROOT%{_javadocdir}/%{srcname}-%{version}
+cp -pr javadoc/* $RPM_BUILD_ROOT%{_javadocdir}/%{srcname}-%{version}
+ln -s %{srcname}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{srcname} # ghost symlink
 %endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post javadoc
-ln -nfs %{name}-%{version} %{_javadocdir}/%{name}
+ln -nfs %{srcname}-%{version} %{_javadocdir}/%{srcname}
 
 %files
 %defattr(644,root,root,755)
 %doc README.txt
-%{_javadir}/%{name}.jar
-%{_javadir}/%{name}-%{version}.jar
+%{_javadir}/%{srcname}.jar
+%{_javadir}/%{srcname}-%{version}.jar
 
 %if %{with tests}
 %files test
 %defattr(644,root,root,755)
-%{_javadir}/%{name}-%{version}-junit.jar
-%{_javadir}/%{name}-junit.jar
+%{_javadir}/%{srcname}-%{version}-junit.jar
+%{_javadir}/%{srcname}-junit.jar
 %endif
 
 %if %{with javadoc}
 %files javadoc
 %defattr(644,root,root,755)
-%{_javadocdir}/%{name}-%{version}
-%ghost %{_javadocdir}/%{name}
+%{_javadocdir}/%{srcname}-%{version}
+%ghost %{_javadocdir}/%{srcname}
 %endif
