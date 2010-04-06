@@ -15,7 +15,7 @@ Summary:	Common library for Object Refinery Projects
 Summary(pl.UTF-8):	Biblioteka wspólna dla projektów Object Refinery
 Name:		java-jcommon
 Version:	1.0.16
-Release:	0.1
+Release:	1
 License:	LGPL
 Group:		Libraries/Java
 Source0:	http://downloads.sourceforge.net/jfreechart/%{srcname}-%{version}.tar.gz
@@ -29,9 +29,6 @@ BuildRequires:	jpackage-utils >= 0:1.5
 BuildRequires:	rpm >= 4.4.9-56
 BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.300
-%if %(locale -a | grep -q '^en_US$'; echo $?)
-BuildRequires:	glibc-localedb-all
-%endif
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -77,7 +74,6 @@ Dokumentacja Javadoc do pakietu %{srcname}.
 find . -name '*.jar' | xargs rm -v
 
 %build
-export LC_ALL=en_US # source code not US-ASCII
 %if %{with tests}
 CLASSPATH=$(build-classpath junit)
 %endif
