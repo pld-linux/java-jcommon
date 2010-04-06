@@ -1,8 +1,14 @@
 #
 # Conditional build:
 %bcond_without	javadoc		# don't build javadoc
-%bcond_without	tests		# don't build and run tests
-#
+%bcond_with	tests		# don't build tests
+
+%if "%{pld_release}" == "ti"
+%bcond_without	java_sun	# build with gcj
+%else
+%bcond_with	java_sun	# build with java-sun
+%endif
+
 %include	/usr/lib/rpm/macros.java
 %define		srcname		jcommon
 Summary:	Common library for Object Refinery Projects
@@ -12,12 +18,15 @@ Version:	1.0.16
 Release:	0.1
 License:	LGPL
 Group:		Libraries/Java
-Source0:	http://dl.sourceforge.net/jfreechart/%{srcname}-%{version}.tar.gz
+Source0:	http://downloads.sourceforge.net/jfreechart/%{srcname}-%{version}.tar.gz
 # Source0-md5:	5fb774c225cdc7d15a99c9702031ae05
 URL:		http://www.jfree.org/jcommon/index.html
 BuildRequires:	ant
+%{!?with_java_sun:BuildRequires:	java-gcj-compat-devel}
+%{?with_java_sun:BuildRequires:	java-sun}
 BuildRequires:	jpackage-utils >= 0:1.5
-BuildRequires:	junit
+%{?with_tests:BuildRequires:	junit}
+BuildRequires:	rpm >= 4.4.9-56
 BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.300
 %if %(locale -a | grep -q '^en_US$'; echo $?)
@@ -68,8 +77,10 @@ Dokumentacja Javadoc do pakietu %{srcname}.
 find . -name '*.jar' | xargs rm -v
 
 %build
-export CLASSPATH=$(build-classpath junit)
 export LC_ALL=en_US # source code not US-ASCII
+%if %{with tests}
+CLASSPATH=$(build-classpath junit)
+%endif
 %ant -f ant/build.xml -Dbuildstable=true -Dproject.outdir=. -Dbasedir=. \
 	compile %{?with_tests:compile-junit-tests} %{?with_javadoc:javadoc}
 
