@@ -3,12 +3,6 @@
 %bcond_without	javadoc		# don't build javadoc
 %bcond_with	tests		# don't build tests
 
-%if "%{pld_release}" == "ti"
-%bcond_without	java_sun	# build with gcj
-%else
-%bcond_with	java_sun	# build with java-sun
-%endif
-
 %include	/usr/lib/rpm/macros.java
 %define		srcname		jcommon
 Summary:	Common library for Object Refinery Projects
@@ -22,11 +16,9 @@ Source0:	http://downloads.sourceforge.net/jfreechart/%{srcname}-%{version}.tar.g
 # Source0-md5:	5fb774c225cdc7d15a99c9702031ae05
 URL:		http://www.jfree.org/jcommon/index.html
 BuildRequires:	ant
-%{!?with_java_sun:BuildRequires:	java-gcj-compat-devel}
-%{?with_java_sun:BuildRequires:	java-sun}
+BuildRequires:	jdk
 BuildRequires:	jpackage-utils >= 0:1.5
 %{?with_tests:BuildRequires:	junit}
-BuildRequires:	rpm >= 4.4.9-56
 BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.300
 BuildArch:	noarch
