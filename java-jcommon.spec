@@ -3,7 +3,6 @@
 %bcond_without	javadoc		# don't build javadoc
 %bcond_with	tests		# don't build tests
 
-%include	/usr/lib/rpm/macros.java
 %define		srcname		jcommon
 Summary:	Common library for Object Refinery Projects
 Summary(pl.UTF-8):	Biblioteka wspólna dla projektów Object Refinery
